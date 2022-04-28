@@ -3,8 +3,9 @@ Create a backup using the DD command. Scripts to make life easier.
 
 # CMU side:
 ___
-_Check that Python3 version is 3.6 ot highter on the CMU
-Check that NFS server IP is accessible from the CMU_
+_Check that Python3 version is 3.6 ot highter._
+
+_Check that NFS server IP is accessible._
 ___
 1. Run script "RPi-Backup.py" on the CMU
 2. Run one of the command displayed on the screen as the result of the script
