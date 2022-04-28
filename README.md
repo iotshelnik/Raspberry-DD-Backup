@@ -27,3 +27,6 @@ ___
 
 ___
 In our case the NFS share is stored on the DELL UNITY Storage. So the "Server" means the some server where you configuren the WEB to download stored backup from mounted NFS share.
+
+___
+_Original script "pishrink.sh" is taken at [Drewsif](https://github.com/Drewsif)_
