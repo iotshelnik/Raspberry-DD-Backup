@@ -44,7 +44,7 @@ sudo umount /Backups
 
 ___
 
-## Example ##
+## Example for RPi-Backup.py script ##
 ```
 pi@raspberry:~ $ sudo python3 RPi-Backup_v0.1.py --nfs '172.28.10.100:/share-dir'
 The NFS share to mount is: 172.28.10.100:/share-dir 
