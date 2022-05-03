@@ -3,7 +3,6 @@ import os
 import socket
 import time
 import subprocess
-import subprocess
 import argparse
 from subprocess import PIPE
 from subprocess import check_call
@@ -18,12 +17,12 @@ parser.add_argument("-nfs","--nfs", help="Prints the export path to NFS share. L
 args = parser.parse_args()
 print(f"The NFS share to mount is: {args.nfs} ")
 
-# Test. Get hostname.
+# Get hostname.
 RPiHostname = socket.gethostname()
 print ("The hostname is: {}".format(RPiHostname))
 
 # Base path where NFSv4 is mounted
-NFSv4Path = "/CMU-Backups"
+NFSv4Path = "/Backups"
 # Check and create if needed the directory with hostname
 os.makedirs(NFSv4Path, exist_ok=True)
 # Join path test (with "/" at the and!)
@@ -43,16 +42,11 @@ timestr = time.strftime("%m%d%Y-%H-%M")
 print ('The date is: {}'.format(timestr))
 # Set Filename variable
 BackupFileName = RPiHostname + '_' + timestr + '.img'
-# Test variable
-#print (BackupFileName)
 
 # variable for cmd
 CMDOutFile = 'of=' + BackupPath + BackupFileName
-# Test variable for cmd
-#print (CMDOutFile)
 
-# Need for "dd" command
-
+# Next is need for "dd" command
 # determine the boot drive in linux using drive path
 df = check_output(['df']).decode()
 dflines = df.split('\n')
@@ -85,13 +79,13 @@ elif question == 2:
     print ( 'Physical block size: ' + str(open('/sys/block/sda/queue/physical_block_size','r').read()).strip() )
     PhysicalBlockSize = int(open('/sys/block/sda/queue/physical_block_size','r').read())
 
-
+# To speedup command execution we change the counter and the block size accordingly
 SectorsCount = int( SectorsCount / 8 )
 PhysicalBlockSize = int( PhysicalBlockSize * 8 )
-
+# Convert to string and concatenate
 SectorsCount = ('count=' + str(SectorsCount)).strip()
 PhysicalBlockSize = ('bs=' + str(PhysicalBlockSize)).strip()
-
+# Print results
 print ('Run the command below to create the backup image from SD card with OS to the NFS storage:\n')
 print ("sudo dd {} {} {} {} status=progress conv=fsync".format(SourceDevice,CMDOutFile,PhysicalBlockSize,SectorsCount))
 print ('Or use command below, but ansure that the "pv" is installed !')
@@ -99,10 +93,6 @@ print ('sudo dd {} {} {} | pv | sudo dd {}'.format(SourceDevice,PhysicalBlockSiz
 print ()
 print ('To run in backgroud use next command:')
 print ("sudo dd {} {} {} {} &".format(SourceDevice,CMDOutFile,PhysicalBlockSize,SectorsCount))
-# sudo dd if=/dev/mmcblk0 bs=4096 count=3860480 conv=fsync | pv | sudo dd of=/backups/HomePi4/HomePi4_04232022-10-35.img
-
-
-
 
 ## To clear console
 #clear = lambda: os.system('clear')
