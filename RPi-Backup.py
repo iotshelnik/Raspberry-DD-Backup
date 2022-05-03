@@ -3,33 +3,36 @@ import os
 import socket
 import time
 import subprocess
-import sys
-import signal
 import subprocess
-from subprocess import Popen, PIPE
+import argparse
+from subprocess import PIPE
 from subprocess import check_call
 from subprocess import check_output
 
 # The print(f'') forman needs the python3.6 minimum version !!!
 # So I used print(''.format()) 
 
+# Get incommand argument
+parser = argparse.ArgumentParser(description='Script to mount the NFS share and to prepare the command for create backup of the SD card to it.')
+parser.add_argument("-nfs","--nfs", help="Prints the export path to NFS share. Like: aa.bb.cc.dd:/share-dir ",required=True, type=str)
+args = parser.parse_args()
+print(f"The NFS share to mount is: {args.nfs} ")
+
 # Test. Get hostname.
 RPiHostname = socket.gethostname()
 print ("The hostname is: {}".format(RPiHostname))
 
 # Base path where NFSv4 is mounted
-NFSv4Path = "/backups"
-NFSv4PathSubDir = 'Incoming'
+NFSv4Path = "/CMU-Backups"
 # Check and create if needed the directory with hostname
 os.makedirs(NFSv4Path, exist_ok=True)
 # Join path test (with "/" at the and!)
 
 # How to mount a network directory using python
-check_call( 'mount -t nfs 172.28.24.212:/CMU-Backup-TB ' + NFSv4Path, shell=True )
+check_call( 'mount -t nfs ' + args.nfs + ' ' + NFSv4Path, shell=True )
 
 # Set variable for backup path
-BackupPath = os.path.join(NFSv4Path, NFSv4PathSubDir, "")
-BackupPath = os.path.join(BackupPath, socket.gethostname(), "")
+BackupPath = os.path.join(NFSv4Path, socket.gethostname(), "")
 # Check and create if needed the directory with hostname
 print("Check|Create the directory for backup: \n {}".format(BackupPath) )
 os.makedirs(BackupPath, exist_ok=True)
