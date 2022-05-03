@@ -9,8 +9,7 @@ _The original "pishrink.sh" script is at [github](https://github.com/Drewsif/PiS
 ### Installation ###
 
 ```bash
-wget https://github.com/iotshelnik/Raspberry-DD-Backup.git
-cd Raspberry-DD-Backup
+wget https://raw.githubusercontent.com/iotshelnik/Raspberry-DD-Backup/main/pishrink.sh
 chmod +x pishrink.sh
 sudo mv pishrink.sh /usr/local/bin
 ```
@@ -31,8 +30,7 @@ ___
 ### Usage ###
 
 ```bash
-wget https://github.com/iotshelnik/Raspberry-DD-Backup.git
-cd Raspberry-DD-Backup
+wget https://raw.githubusercontent.com/iotshelnik/Raspberry-DD-Backup/main/RPi-Backup.py
 sudo python3 RPi-Backup.py --nfs '172.28.10.100:/share-dir'
 ```
 Follow on-screen instructions.
