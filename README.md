@@ -14,7 +14,7 @@ chmod +x pishrink.sh
 sudo mv pishrink.sh /usr/local/bin
 ```
 
-## Usage ##
+### Usage ###
 
 You may read about usage at original "pishrink.sh" script page:
 [ Drewsif / PiShrink ](https://github.com/Drewsif/PiShrink#pishrink).
