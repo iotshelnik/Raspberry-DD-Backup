@@ -92,7 +92,7 @@ print ('\nOr use command below, but ansure that the "pv" is installed !')
 print ('sudo dd {} {} {} | pv | sudo dd {}'.format(SourceDevice,PhysicalBlockSize,SectorsCount,CMDOutFile))
 print ('\nTo run in backgroud use next command:')
 print ("sudo dd {} {} {} {} &".format(SourceDevice,CMDOutFile,PhysicalBlockSize,SectorsCount))
-print ('After the image creation is done use the next command to unmount the NFS share and delete mount directory:')
+print ('\nAfter the image creation is done use the next command to unmount the NFS share and delete mount directory:')
 print (f'sudo unmount {NFSv4Path} && sudo rm {NFSv4Path}')
 ## To clear console
 #clear = lambda: os.system('clear')
