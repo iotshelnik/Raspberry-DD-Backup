@@ -86,14 +86,14 @@ PhysicalBlockSize = int( PhysicalBlockSize * 8 )
 SectorsCount = ('count=' + str(SectorsCount)).strip()
 PhysicalBlockSize = ('bs=' + str(PhysicalBlockSize)).strip()
 # Print results
-print ('Run the command below to create the backup image from SD card with OS to the NFS storage:\n')
+print ('Run the command below to create the backup image from SD card with OS to the NFS storage:')
 print ("sudo dd {} {} {} {} status=progress conv=fsync".format(SourceDevice,CMDOutFile,PhysicalBlockSize,SectorsCount))
 print ('\nOr use command below, but ansure that the "pv" is installed !')
 print ('sudo dd {} {} {} | pv | sudo dd {}'.format(SourceDevice,PhysicalBlockSize,SectorsCount,CMDOutFile))
 print ('\nTo run in backgroud use next command:')
 print ("sudo dd {} {} {} {} &".format(SourceDevice,CMDOutFile,PhysicalBlockSize,SectorsCount))
 print ('\nAfter the image creation is done use the next command to unmount the NFS share and delete mount directory:')
-print (f'sudo unmount {NFSv4Path} && sudo rm {NFSv4Path}')
+print (f'sudo umount {NFSv4Path} && sudo rmdir {NFSv4Path}')
 ## To clear console
 #clear = lambda: os.system('clear')
 ## Shell cmd for 'dd'
