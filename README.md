@@ -21,6 +21,8 @@ You may read about usage at original "pishrink.sh" script page:
 
 Note: Script is modified to delete some additional directories and to compress image after shrinking with gzip (it is `-p` and `-z` keys) as the default option. Even if you are not using these keys in command.
 
+As the result, you will have the compressed image (__*.img__) with will take less space to store. It will have format __*.img.gz__.
+
 ## Raspberry Pi side:
 ___
 _Check that Python3 version is 3.6 ot highter._
@@ -74,4 +76,21 @@ sudo dd if=/dev/mmcblk0 bs=4096 count=7608576 | pv | sudo dd of=/Backups/raspber
 
 To run in backgroud use next command:
 sudo dd if=/dev/mmcblk0 of=/Backups/raspberry/raspberry_05032022-11-39.img bs=4096 count=7608576 &
+```
+
+## Restore ##
+
+To restore the image file you may use the official "Raspberry Pi Imager" or use, as an example, the command below from the shell:
+
+gunzip -c /NFSShare/path/to/image/file.img.gz | dd of=/dev/{sda|mmcblk0} conv=sync,noerror bs=4k status=progress
+
+
+### Example ###
+
+```
+$ sudo gunzip -c /Backups/raspberry/raspberry_05032022-11-39.img.gz | dd of=/dev/sda conv=sync,noerror bs=4k status=progress
+
+1008295+1 records in
+1008296+0 records out
+4129980416 bytes (4.1 GB, 3.8 GiB) copied, 147.894 s, 27.9 MB/s
 ```
